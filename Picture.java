@@ -138,7 +138,7 @@ public class Picture extends SimplePicture
                 //set the target pixel color to the source pixel color
             }
     }
-    
+
     /**
      * Method to mirror around a vertical line in the middle of the
      * picture based on the width
@@ -147,10 +147,10 @@ public class Picture extends SimplePicture
     {
         int width = this.getWidth();
         int mirrorPoint = width/2;
-        
+
         Pixel leftPixel = null;
         Pixel rightPixel = null;
-        
+
         //loop through all rows
         for(int y=0; y<getHeight(); y++)
         {
@@ -163,14 +163,14 @@ public class Picture extends SimplePicture
                }
            }
        }
-       
+
     public void mirrorHorizontal()
     {
         int height = this.getHeight();
         int mirrorPoint = height/2;
         Pixel topPixel = null;
         Pixel bottomPixel = null;
-        
+
         for(int x = 0; x<getWidth(); x++)
         {
             for(int y=0; y<mirrorPoint; y++)
@@ -181,7 +181,7 @@ public class Picture extends SimplePicture
                }
            }
         }
-       
+
     public void copySmaller(Picture file, int amt)
     {
         Picture pic = file;
@@ -201,15 +201,20 @@ public class Picture extends SimplePicture
                }
            }
        }
-     
-       
-       
+
+
+
     // NEW METHODS
-    
-    
-    
+
+
+
     Random rand = new Random();
-    
+
+    /**
+	 * Intensify
+	 * Makes highest RGB value 255
+     */
+
     public void Intense()
     {
         for(int x=0;x<this.getWidth();x++)
@@ -241,7 +246,12 @@ public class Picture extends SimplePicture
             }
         }
     }
-    
+
+    /**
+	 * Edge
+	 * Makes edges yellow and background violet
+     */
+
     public void edge(int num)
     {
         Pixel topPixel = null;
@@ -264,37 +274,47 @@ public class Picture extends SimplePicture
                }
            }
     }
-    
+
+    /**
+	 * Horizontal Negative Mirror
+	 * Makes mirror of image negative
+     */
+
     public void mirrorHorizontalneg()
     {
         int height = this.getHeight();
         int mirrorPoint = height/2;
         Pixel topPixel = null;
         Pixel bottomPixel = null;
-        
+
         for(int x = 0; x<getWidth(); x++)
         {
             for(int y=0; y<mirrorPoint; y++)
             {
                 topPixel = getPixel(x,y);
                 bottomPixel = getPixel(x,height-1-y);
-                
+
                 bottomPixel.setRed(Math.abs(255-topPixel.getRed()));
                 bottomPixel.setBlue(Math.abs(255-topPixel.getBlue()));
                 bottomPixel.setGreen(Math.abs(255-topPixel.getGreen()));
-                
+
                }
            }
         }
-        
+
+    /**
+	 * Vertical Negative Mirror
+	 * Makes mirror of image negative
+     */
+
     public void mirrorVerticalcol()
     {
         int width = this.getWidth();
         int mirrorPoint = width/2;
-        
+
         Pixel leftPixel = null;
         Pixel rightPixel = null;
-        
+
         //loop through all rows
         for(int y=0; y<getHeight(); y++)
         {
@@ -303,18 +323,23 @@ public class Picture extends SimplePicture
             {
                 leftPixel = getPixel(x,y);
                 rightPixel = getPixel(width -1 -x,y);
-                
+
                 rightPixel.setRed(Math.abs(255-leftPixel.getRed()));
                 rightPixel.setBlue(Math.abs(255-leftPixel.getBlue()));
                 rightPixel.setGreen(Math.abs(255-leftPixel.getGreen()));
-                
+
                 //rightPixel.setRed(leftPixel.getBlue());
                 //rightPixel.setBlue(leftPixel.getGreen());
                 //rightPixel.setGreen(leftPixel.getRed());
                }
            }
        }
-       
+
+    /**
+	 * Background Changer
+	 * Takes an image and replaces a white background with the new image
+     */
+
     public void background(Picture file)
     {
         Pixel sourcePixel = null;
@@ -340,15 +365,20 @@ public class Picture extends SimplePicture
             }
         }
     }
-    
+
+    /**
+	 * Recursive Copy Smaller
+	 * Takes a number and makes a picture smaller and smaller until it is 6 times smaller
+     */
+
     public void recursive(Picture pic, int amt)
     {
         Pixel sourcePixel = null;
         Pixel targetPixel = null;
-        
+
         if(amt == 6)
         {}
-        
+
         else{
             for(int sourceX = 0, targetX=0;
                 sourceX<pic.getWidth();
@@ -372,14 +402,19 @@ public class Picture extends SimplePicture
             pic.recursive(pic,amt+1);
         }
     }
-    
+
+    /**
+	 * Mirror Color
+	 * Mirror image and changes RGB colors around
+     */
+
     public void mirrorColor()
     {
         int height = this.getHeight();
         int mirrorPoint = height/2;
         Pixel topPixel = null;
         Pixel bottomPixel = null;
-        
+
         for(int x = 0; x<getWidth(); x++)
         {
             for(int y=0; y<mirrorPoint; y++)
